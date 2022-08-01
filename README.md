@@ -47,20 +47,21 @@
 ### Association
 
 - belongs_to :item
-- belongs_to :address
+- has_one :address
+- belongs_to :user
 
 ## addresses テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postcode      | string     | null: false                    |
-| prefecture_id | integer    | null: false                    |
+| sender_id     | integer    | null: false                    |
 | city          | string     | null: false                    |
 | street        | string     | null: false                    |
 | building      | string     |                                |
 | phone_number  | string     | null: false                    |
-| item          | references | null: false, foreign_key: true |
-| user          | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
+
 
 ### Association
 
