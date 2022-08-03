@@ -11,7 +11,7 @@
   </div>
 
   <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-  <%# render 'shared/error_messages', model: f.object %>
+  <%= render 'shared/error_messages', model: f.object %>
   <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
   <div class="form-group">
@@ -79,7 +79,7 @@
     <div class='input-birth-wrap'>
       <%= raw sprintf(
                   f.date_select(
-                    :birth_date,
+                    :date_of_birth,
                     class:'select-birth',
                     id:"birth-date",
                     use_month_numbers: true,
@@ -99,7 +99,7 @@
     </h2>
   </div>
   <div class='register-btn'>
-    <%= f.submit "会員登録" ,class:"register-red-btn" %>
+    <%= f.submit "会員登録" , class:"register-red-btn" %>
   </div>
   <p class='register-info'>本人情報の登録について</p>
 </div>
