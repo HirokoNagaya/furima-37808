@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_charge
   belongs_to :sender
   belongs_to :day_to_ship
-  end
+  
 
   belongs_to :user
 
