@@ -15,8 +15,8 @@ class Item < ApplicationRecord
   #メモ；空の投稿を保存できないようにする
   validates :item_name, presence: true
   validates :description, presence: true
-  validates :price, numericality: {greater_than: 300,less_than: 9999999}, presence: true
-
+  validates :price, numericality: {greater_than: 299,less_than: 9999999}, presence: true
+  validates :image, presence: true
 
   #メモ；ジャンルの選択が「---」の時は保存できないようにする
   validates :category_id, numericality: { other_than: 1 }
