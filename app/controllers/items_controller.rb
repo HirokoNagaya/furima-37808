@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :item_definition, only: [:edit, :update, :show]
   before_action :contributor_confirmation, only: [:edit, :update]
 
   def index
@@ -20,15 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    item_definition
   end
 
   def edit
-    item_definition
   end
 
   def update
-    item_definition
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
