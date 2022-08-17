@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   belongs_to :sender
   belongs_to :day_to_ship
 
+  has_one :order
   belongs_to :user
 
   has_one_attached :image
