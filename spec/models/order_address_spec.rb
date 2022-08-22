@@ -28,10 +28,10 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
-      it 'sender_idを選択していないと保存できないこと' do
-        @order_address.sender_id = 0
+      it 'sender_idが空では登録できない' do
+        @order_address.sender_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Sender id can't be blank")
+        expect(@order_address.errors.full_messages).to include 'Sender is not a number'
       end
       it 'cityが空だと保存できないこと' do
         @order_address.city = nil

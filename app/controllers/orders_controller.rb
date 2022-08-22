@@ -1,26 +1,40 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :item_definition, only: [:create, :index]
+  before_action :move_to_index, :create
+  before_action :redirection, :create
+ 
 
   def index
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
   end
 
-  
-
   def create
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
-    if @order_address.valid?
-      pay_item
-      @order_address.save
-      redirect_to root_path
-    else
-      render :index
-    end
+      if @order_address.valid?
+        pay_item
+        @order_address.save
+        redirect_to root_path
+      else
+        render :index
+      end
   end
 
   private
+
+  def item_definition
+    @item = Item.find(params[:item_id])
+  end
+
+  def redirection
+    if @item.order.present? || current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+
+  def move_to_index
+    redirect_to new_user_session_path unless user_signed_in?
+  end
 
   def order_params
     params.require(:order_address).permit(:postcode, :sender_id, :city, :street, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
