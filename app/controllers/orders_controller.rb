@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :item_definition, only: [:create, :index]
-  before_action :move_to_index, only: [:create, :index]
-  before_action :redirection_user, only: [:create, :index]
+  before_action :move_to_login, only: [:create, :index]
   before_action :redirection_soldout, only: [:create, :index]
+  before_action :redirection_user, only: [:create, :index]
+  
  
 
   def index
@@ -39,7 +40,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def move_to_index
+  def move_to_login
     redirect_to new_user_session_path unless user_signed_in?
   end
 
