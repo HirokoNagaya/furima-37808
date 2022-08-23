@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index]
   before_action :item_definition, only: [:create, :index]
-  before_action :move_to_index, :create
-  before_action :redirection, :create
+  before_action :move_to_index, only: [:create, :index]
+  before_action :redirection_user, only: [:create, :index]
+  before_action :redirection_soldout, only: [:create, :index]
  
 
   def index
@@ -26,8 +27,14 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirection
-    if @item.order.present? || current_user.id == @item.user_id
+  def redirection_user
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+
+  def redirection_soldout
+    if @item.order.present?
       redirect_to root_path
     end
   end
